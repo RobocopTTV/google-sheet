@@ -199,8 +199,8 @@ html, body { height:100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe
 .btn-sm { border-radius:8px; }
 .schedule-info .site { letter-spacing:-.01em; }
 </style>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 </head>
 <body>
 
@@ -1549,20 +1549,26 @@ var ROUTE_MAP = null, ROUTE_LAYER = null;
 var ROUTE_COLORS = ['#2563eb', '#dc2626', '#16a34a', '#ea580c', '#7c3aed', '#0891b2', '#db2777', '#65a30d'];
 
 function ensureRouteMap() {
-  if (ROUTE_MAP) return;
+  if (ROUTE_MAP) return true;
+  if (typeof L === 'undefined') {
+    var lg = document.getElementById('routeLegend');
+    if (lg) lg.innerHTML = '<div class="empty" style="padding:8px 0;color:var(--red);">地图库加载失败，请检查网络后刷新 / Map library failed to load — check network &amp; refresh</div>';
+    return false;
+  }
   ROUTE_MAP = L.map('routeMap').setView([-37.84, 145.0], 11); // 默认墨尔本
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19, attribution: '© OpenStreetMap'
   }).addTo(ROUTE_MAP);
   ROUTE_LAYER = L.layerGroup().addTo(ROUTE_MAP);
+  return true;
 }
 
 function loadRouteMap() {
   var date = document.getElementById('routeDate').value;
   var emp = document.getElementById('routeEmployee').value;
   if (!date) { showToast(t('pickDateFirst'), 'error'); return; }
-  ensureRouteMap();
-  setTimeout(function() { ROUTE_MAP.invalidateSize(); }, 100);
+  if (!ensureRouteMap()) return;
+  setTimeout(function() { if (ROUTE_MAP) ROUTE_MAP.invalidateSize(); }, 300);
   showToast(t('loading'), '');
   google.script.run.withSuccessHandler(renderRouteMap)
     .withFailureHandler(function(e) { showToast(t('loadFailed', { msg: e.message }), 'error'); })
@@ -1570,12 +1576,12 @@ function loadRouteMap() {
 }
 
 function renderRouteMap(points) {
-  ensureRouteMap();
+  if (!ensureRouteMap()) return;
   ROUTE_LAYER.clearLayers();
   var legend = document.getElementById('routeLegend');
   if (!points || !points.length) {
     legend.innerHTML = '<div class="empty" style="padding:8px 0;">' + t('noRoutePoints') + '</div>';
-    setTimeout(function() { ROUTE_MAP.invalidateSize(); }, 100);
+    setTimeout(function() { if (ROUTE_MAP) ROUTE_MAP.invalidateSize(); }, 300);
     return;
   }
 
@@ -1607,7 +1613,7 @@ function renderRouteMap(points) {
   }
   legend.innerHTML = legendHtml;
   if (bounds.length) ROUTE_MAP.fitBounds(bounds, { padding: [30, 30], maxZoom: 16 });
-  setTimeout(function() { ROUTE_MAP.invalidateSize(); }, 100);
+  setTimeout(function() { if (ROUTE_MAP) ROUTE_MAP.invalidateSize(); }, 300);
 }
 
 // ╔════════════════════════════════════════╗
