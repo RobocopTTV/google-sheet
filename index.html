@@ -7,50 +7,56 @@
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 :root {
   --blue: #2563eb;
-  --blue-light: #dbeafe;
-  --blue-dark: #1e40af;
+  --blue-light: #e7efff;
+  --blue-dark: #1d4ed8;
+  --indigo: #4f46e5;
+  --grad: linear-gradient(135deg, #4f46e5 0%, #2563eb 55%, #1d4ed8 100%);
   --green: #16a34a;
   --green-light: #dcfce7;
   --red: #dc2626;
   --red-light: #fee2e2;
   --orange: #ea580c;
   --orange-light: #fff7ed;
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-600: #4b5563;
-  --gray-800: #1f2937;
-  --radius: 12px;
-  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-  --shadow-lg: 0 4px 12px rgba(0,0,0,.1);
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e8edf3;
+  --gray-300: #d1d9e3;
+  --gray-400: #94a3b8;
+  --gray-600: #475569;
+  --gray-800: #1e293b;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.06);
+  --shadow-lg: 0 12px 32px rgba(16,24,40,.14);
 }
-html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background:var(--gray-50); color:var(--gray-800); font-size:15px; line-height:1.5; }
+html, body { height:100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background:var(--gray-100); color:var(--gray-800); font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
 
 /* ── Layout ── */
-#app { display:flex; flex-direction:column; height:100%; max-width:480px; margin:0 auto; background:#fff; position:relative; }
-.header { background:var(--blue); color:#fff; padding:16px 20px; padding-top: max(16px, env(safe-area-inset-top)); }
-.header h1 { font-size:18px; font-weight:600; }
-.header .sub { font-size:13px; opacity:.8; margin-top:2px; }
-.content { flex:1; overflow-y:auto; padding:16px; padding-bottom:80px; -webkit-overflow-scrolling:touch; }
-.tab-bar { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; background:#fff; border-top:1px solid var(--gray-200); display:flex; padding-bottom:max(8px, env(safe-area-inset-bottom)); z-index:100; }
-.tab-item { flex:1; display:flex; flex-direction:column; align-items:center; padding:8px 4px; font-size:11px; color:var(--gray-400); cursor:pointer; transition:color .2s; user-select:none; }
-.tab-item.active { color:var(--blue); }
-.tab-item svg { width:22px; height:22px; margin-bottom:2px; }
+#app { display:flex; flex-direction:column; height:100%; max-width:480px; margin:0 auto; background:#fff; position:relative; box-shadow:0 0 60px rgba(16,24,40,.08); }
+.header { background:var(--grad); color:#fff; padding:18px 20px; padding-top: max(18px, env(safe-area-inset-top)); box-shadow:0 6px 20px rgba(37,99,235,.22); position:relative; z-index:2; }
+.header h1 { font-size:19px; font-weight:700; letter-spacing:-.01em; }
+.header .sub { font-size:13px; opacity:.85; margin-top:3px; }
+.content { flex:1; overflow-y:auto; padding:16px; padding-bottom:84px; -webkit-overflow-scrolling:touch; }
+.tab-bar { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; background:rgba(255,255,255,.92); backdrop-filter:saturate(180%) blur(12px); -webkit-backdrop-filter:saturate(180%) blur(12px); border-top:1px solid var(--gray-200); display:flex; padding-bottom:max(8px, env(safe-area-inset-bottom)); z-index:100; }
+.tab-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; padding:9px 4px; font-size:11px; font-weight:500; color:var(--gray-400); cursor:pointer; transition:color .2s; user-select:none; position:relative; }
+.tab-item.active { color:var(--blue); font-weight:600; }
+.tab-item.active::before { content:''; position:absolute; top:0; width:26px; height:3px; border-radius:0 0 4px 4px; background:var(--grad); }
+.tab-item svg { width:23px; height:23px; transition:transform .2s; }
+.tab-item.active svg { transform:translateY(-1px) scale(1.05); }
 
 /* ── Cards ── */
-.card { background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius); padding:16px; margin-bottom:12px; box-shadow:var(--shadow); }
-.card-title { font-size:14px; font-weight:600; color:var(--gray-600); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+.card { background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius); padding:18px; margin-bottom:14px; box-shadow:var(--shadow); }
+.card-title { font-size:14px; font-weight:700; color:var(--gray-800); margin-bottom:14px; padding-bottom:11px; border-bottom:1px solid var(--gray-100); display:flex; align-items:center; gap:8px; letter-spacing:-.01em; }
 
 /* ── Buttons ── */
-.btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:10px 20px; border-radius:8px; font-size:15px; font-weight:500; border:none; cursor:pointer; transition:all .15s; user-select:none; }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:11px 20px; border-radius:10px; font-size:15px; font-weight:600; border:none; cursor:pointer; transition:all .15s; user-select:none; }
 .btn:active { transform:scale(.97); }
-.btn-primary { background:var(--blue); color:#fff; }
-.btn-primary:hover { background:var(--blue-dark); }
-.btn-success { background:var(--green); color:#fff; }
-.btn-danger { background:var(--red); color:#fff; }
+.btn-primary { background:var(--grad); color:#fff; box-shadow:0 3px 10px rgba(37,99,235,.28); }
+.btn-primary:hover { filter:brightness(1.06); }
+.btn-success { background:linear-gradient(135deg,#22c55e,#16a34a); color:#fff; box-shadow:0 3px 10px rgba(22,163,74,.28); }
+.btn-danger { background:linear-gradient(135deg,#ef4444,#dc2626); color:#fff; box-shadow:0 3px 10px rgba(220,38,38,.25); }
 .btn-outline { background:#fff; color:var(--gray-600); border:1px solid var(--gray-300); }
+.btn-outline:hover { border-color:var(--blue); color:var(--blue); }
 .btn-sm { padding:6px 14px; font-size:13px; }
 .btn-block { width:100%; }
 .btn:disabled { opacity:.5; cursor:not-allowed; }
@@ -59,26 +65,27 @@ html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft 
 .form-group { margin-bottom:14px; }
 .form-label { display:block; font-size:13px; font-weight:500; color:var(--gray-600); margin-bottom:4px; }
 .form-input, .form-select, .form-textarea {
-  width:100%; padding:10px 12px; border:1px solid var(--gray-300); border-radius:8px;
-  font-size:15px; font-family:inherit; background:#fff; color:var(--gray-800);
-  transition:border-color .15s; appearance:none; -webkit-appearance:none;
+  width:100%; padding:11px 13px; border:1px solid var(--gray-300); border-radius:10px;
+  font-size:15px; font-family:inherit; background:var(--gray-50); color:var(--gray-800);
+  transition:border-color .15s, box-shadow .15s, background .15s; appearance:none; -webkit-appearance:none;
 }
-.form-input:focus, .form-select:focus, .form-textarea:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-light); }
+.form-input:hover, .form-select:hover, .form-textarea:hover { border-color:var(--gray-400); }
+.form-input:focus, .form-select:focus, .form-textarea:focus { outline:none; border-color:var(--blue); background:#fff; box-shadow:0 0 0 3px var(--blue-light); }
 .form-textarea { resize:vertical; min-height:80px; }
 .form-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; padding-right:36px; }
 
 /* ── Status badges ── */
-.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:12px; font-weight:500; }
+.badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:600; }
 .badge-blue { background:var(--blue-light); color:var(--blue); }
 .badge-green { background:var(--green-light); color:var(--green); }
 .badge-red { background:var(--red-light); color:var(--red); }
 .badge-orange { background:var(--orange-light); color:var(--orange); }
 
 /* ── Clock display ── */
-.clock-display { text-align:center; padding:24px 0; }
-.clock-time { font-size:42px; font-weight:700; color:var(--gray-800); font-variant-numeric:tabular-nums; letter-spacing:-1px; }
-.clock-date { font-size:14px; color:var(--gray-400); margin-top:4px; }
-.clock-site { font-size:15px; color:var(--blue); margin-top:8px; font-weight:500; }
+.clock-display { text-align:center; padding:28px 0 20px; }
+.clock-time { font-size:52px; font-weight:800; color:var(--blue-dark); font-variant-numeric:tabular-nums; letter-spacing:-2px; line-height:1; }
+.clock-date { font-size:14px; color:var(--gray-400); margin-top:8px; }
+.clock-site { display:inline-block; font-size:14px; color:var(--blue); margin-top:12px; font-weight:600; background:var(--blue-light); padding:6px 14px; border-radius:20px; }
 
 /* ── Schedule cards ── */
 .schedule-item { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-100); }
@@ -148,10 +155,49 @@ html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft 
 .assign-remove { width:28px; height:28px; border-radius:50%; background:var(--red-light); color:var(--red); border:none; cursor:pointer; font-size:16px; flex-shrink:0; }
 
 /* ── Photo grid ── */
-.photo-thumb { width:100%; height:90px; object-fit:cover; border-radius:8px; border:1px solid var(--gray-200); display:block; background:var(--gray-100); }
+.photo-thumb { width:100%; height:90px; object-fit:cover; border-radius:10px; border:1px solid var(--gray-200); display:block; background:var(--gray-100); }
 
 /* ── Leaflet popup font ── */
 .leaflet-popup-content { font-family:inherit; font-size:13px; }
+
+/* ── Stat tiles ── */
+.stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.stat-tile { background:linear-gradient(135deg,#fff,var(--gray-50)); border:1px solid var(--gray-200); border-radius:var(--radius-sm); padding:13px 8px; text-align:center; }
+.stat-tile .num { font-size:23px; font-weight:800; color:var(--blue); font-variant-numeric:tabular-nums; letter-spacing:-.03em; line-height:1.1; }
+.stat-tile .lbl { font-size:11px; color:var(--gray-400); margin-top:3px; }
+
+/* ── Site hours bars ── */
+.site-stat { padding:13px 0; border-bottom:1px solid var(--gray-100); }
+.site-stat:last-child { border-bottom:none; padding-bottom:2px; }
+.site-stat-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:7px; }
+.site-stat-name { font-weight:700; font-size:15px; color:var(--gray-800); }
+.site-stat-hours { font-weight:800; color:var(--blue); font-size:15px; font-variant-numeric:tabular-nums; }
+.site-bar { height:8px; background:var(--gray-100); border-radius:6px; overflow:hidden; }
+.site-bar-fill { height:100%; background:var(--grad); border-radius:6px; transition:width .6s cubic-bezier(.4,0,.2,1); }
+.site-stat-meta { font-size:12px; color:var(--gray-400); margin-top:7px; }
+.site-stat-workers { display:flex; flex-wrap:wrap; gap:5px; margin-top:9px; }
+.chip { display:inline-block; background:var(--blue-light); color:var(--blue-dark); border-radius:20px; padding:3px 11px; font-size:12px; font-weight:600; }
+
+/* ── Schedule card accent ── */
+.schedule-icon { box-shadow:inset 0 0 0 1px rgba(37,99,235,.08); }
+
+/* ── Login polish ── */
+#loginScreen h2 { background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+/* ── Language switch ── */
+.lang-switch { display:inline-flex; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.3); border-radius:8px; padding:2px; gap:2px; }
+.lang-switch span { font-size:12px; font-weight:600; color:rgba(255,255,255,.85); padding:3px 9px; border-radius:6px; cursor:pointer; transition:all .15s; user-select:none; }
+.lang-switch span.active { background:#fff; color:var(--blue-dark); }
+
+/* ── Professional polish ── */
+.card { transition:box-shadow .2s ease, transform .2s ease; }
+@media (hover:hover) { .card:hover { box-shadow:var(--shadow-lg); } }
+.modal { position:relative; padding-top:26px; }
+.modal::before { content:''; position:absolute; top:9px; left:50%; transform:translateX(-50%); width:42px; height:4px; border-radius:4px; background:var(--gray-200); }
+.empty { font-size:14px; }
+.empty-icon { opacity:.85; }
+.btn-sm { border-radius:8px; }
+.schedule-info .site { letter-spacing:-.01em; }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
@@ -162,46 +208,56 @@ html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft 
   <!-- Loading -->
   <div id="loadingScreen" class="login-screen">
     <div class="spinner"></div>
-    <p>加载中...</p>
+    <p data-i18n="loading">加载中...</p>
   </div>
 
   <!-- Login (输入邮箱) -->
   <div id="loginScreen" class="login-screen hidden">
     <div style="font-size:44px; margin-bottom:12px;">🦺</div>
-    <h2>工地考勤</h2>
-    <p style="margin-bottom:20px;">请输入你的邮箱登录</p>
-    <input id="loginEmail" class="form-input" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" style="max-width:300px;" onkeydown="if(event.key==='Enter')submitLogin()">
-    <button class="btn btn-primary btn-block mt-16" style="max-width:300px;" onclick="submitLogin()">进入</button>
-    <p style="margin-top:16px; font-size:12px; color:var(--gray-400);">用管理员给你登记的邮箱登录即可</p>
+    <h2 data-i18n="loginTitle">工地考勤</h2>
+    <p style="margin-bottom:20px;" data-i18n="loginPrompt">请输入你的邮箱登录</p>
+    <input id="loginEmail" class="form-input" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" data-i18n-ph="loginPlaceholder" style="max-width:300px;" onkeydown="if(event.key==='Enter')submitLogin()">
+    <button class="btn btn-primary btn-block mt-16" style="max-width:300px;" onclick="submitLogin()" data-i18n="loginEnter">进入</button>
+    <p style="margin-top:16px; font-size:12px; color:var(--gray-400);" data-i18n="loginHint">用管理员给你登记的邮箱登录即可</p>
+    <div class="lang-switch" id="langSwitchLogin" style="margin-top:22px; background:var(--gray-100); border-color:var(--gray-200);">
+      <span data-lang="en" onclick="setLang('en')" style="color:var(--gray-600)">EN</span>
+      <span data-lang="zh" onclick="setLang('zh')" style="color:var(--gray-600)">中文</span>
+    </div>
   </div>
 
   <!-- Not registered -->
   <div id="noAccessScreen" class="login-screen hidden">
     <div style="font-size:48px; margin-bottom:16px;">🔒</div>
-    <h2>无访问权限</h2>
+    <h2 data-i18n="noAccessTitle">无访问权限</h2>
     <p id="noAccessEmail" style="margin-top:8px;"></p>
-    <p style="margin-top:12px;">请联系管理员将你的邮箱添加到系统中</p>
-    <button class="btn btn-outline mt-16" onclick="logout()">换个邮箱</button>
+    <p style="margin-top:12px;" data-i18n="noAccessDesc">请联系管理员将你的邮箱添加到系统中</p>
+    <button class="btn btn-outline mt-16" onclick="logout()" data-i18n="changeEmail">换个邮箱</button>
   </div>
 
   <!-- Main App -->
   <div id="mainApp" class="hidden" style="display:flex; flex-direction:column; height:100%;">
-    <div class="header" style="display:flex; justify-content:space-between; align-items:center;">
-      <div>
-        <h1>工地考勤管理</h1>
+    <div class="header" style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+      <div style="min-width:0;">
+        <h1 data-i18n="appTitle">工地考勤管理</h1>
         <div class="sub" id="userInfo"></div>
       </div>
-      <div onclick="logout()" style="font-size:12px; opacity:.9; cursor:pointer; border:1px solid rgba(255,255,255,.5); padding:5px 10px; border-radius:6px; white-space:nowrap;">退出</div>
+      <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+        <div class="lang-switch" id="langSwitch">
+          <span data-lang="en" onclick="setLang('en')">EN</span>
+          <span data-lang="zh" onclick="setLang('zh')">中</span>
+        </div>
+        <div onclick="logout()" style="font-size:12px; opacity:.9; cursor:pointer; border:1px solid rgba(255,255,255,.5); padding:5px 10px; border-radius:6px; white-space:nowrap;" data-i18n="logout">退出</div>
+      </div>
     </div>
 
     <!-- Page: 排班 -->
     <div class="content page" id="page-schedule">
       <div class="card">
-        <div class="card-title">📅 今日排班</div>
+        <div class="card-title">📅 <span data-i18n="todaySchedule">今日排班</span></div>
         <div id="todaySchedule"><div class="loading"><div class="spinner"></div></div></div>
       </div>
       <div class="card">
-        <div class="card-title">📋 明日排班</div>
+        <div class="card-title">📋 <span data-i18n="tomorrowSchedule">明日排班</span></div>
         <div id="tomorrowSchedule"><div class="loading"><div class="spinner"></div></div></div>
       </div>
     </div>
@@ -219,7 +275,7 @@ html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft 
     <!-- Page: 工时 -->
     <div class="content page hidden" id="page-timesheet">
       <div class="card">
-        <div class="card-title">📊 我的工时</div>
+        <div class="card-title">📊 <span data-i18n="myHours">我的工时</span></div>
         <div class="flex-row mb-8">
           <div class="form-group" style="margin-bottom:0">
             <input type="date" id="tsStart" class="form-input">
@@ -227,7 +283,7 @@ html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft 
           <div class="form-group" style="margin-bottom:0">
             <input type="date" id="tsEnd" class="form-input">
           </div>
-          <button class="btn btn-primary btn-sm" onclick="loadMyTimesheets()" style="flex:0 0 auto;">查询</button>
+          <button class="btn btn-primary btn-sm" onclick="loadMyTimesheets()" style="flex:0 0 auto;" data-i18n="query">查询</button>
         </div>
         <div id="myTimesheetList"></div>
       </div>
@@ -236,22 +292,22 @@ html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft 
     <!-- Page: 拍照 -->
     <div class="content page hidden" id="page-photo">
       <div class="card">
-        <div class="card-title">📷 现场拍照上传</div>
+        <div class="card-title">📷 <span data-i18n="photoUploadTitle">现场拍照上传</span></div>
         <div class="form-group">
-          <label class="form-label">选择工地</label>
-          <select id="photoSite" class="form-select"><option value="">请选择工地</option></select>
+          <label class="form-label" data-i18n="selectSite">选择工地</label>
+          <select id="photoSite" class="form-select"><option value="" data-i18n="selectSitePlaceholder">请选择工地</option></select>
         </div>
         <div class="form-group">
-          <label class="form-label">说明（可选）</label>
-          <input id="photoNote" class="form-input" placeholder="例: 二楼水管安装完成">
+          <label class="form-label" data-i18n="noteOptional">说明（可选）</label>
+          <input id="photoNote" class="form-input" placeholder="例: 二楼水管安装完成" data-i18n-ph="notePlaceholder">
         </div>
-        <label class="btn btn-primary btn-block" for="photoInput">📸 拍照 / 选择照片</label>
+        <label class="btn btn-primary btn-block" for="photoInput">📸 <span data-i18n="takePhoto">拍照 / 选择照片</span></label>
         <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="onPhotoSelected(event)">
         <div id="photoPreview" class="mt-8"></div>
-        <button class="btn btn-success btn-block mt-8 hidden" id="photoUploadBtn" onclick="uploadPhotos()">上传 (<span id="photoCount">0</span>)</button>
+        <button class="btn btn-success btn-block mt-8 hidden" id="photoUploadBtn" onclick="uploadPhotos()"><span data-i18n="upload">上传</span> (<span id="photoCount">0</span>)</button>
       </div>
       <div class="card">
-        <div class="card-title">🖼️ 我的近期照片</div>
+        <div class="card-title">🖼️ <span data-i18n="myRecentPhotos">我的近期照片</span></div>
         <div class="form-group" style="margin-bottom:8px;">
           <input type="date" id="myPhotoDate" class="form-input" onchange="loadMyPhotos()">
         </div>
@@ -263,74 +319,80 @@ html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft 
     <div class="content page hidden" id="page-admin">
       <!-- 排班管理 -->
       <div class="card">
-        <div class="card-title">📅 排班管理</div>
+        <div class="card-title">📅 <span data-i18n="scheduleMgmt">排班管理</span></div>
         <div class="form-group">
-          <label class="form-label">选择日期</label>
+          <label class="form-label" data-i18n="selectDate">选择日期</label>
           <input type="date" id="adminScheduleDate" class="form-input" onchange="loadAdminSchedule()">
         </div>
         <div id="adminScheduleList"></div>
-        <button class="btn btn-primary btn-block mt-8" onclick="showAddAssignment()">+ 添加排班</button>
+        <button class="btn btn-primary btn-block mt-8" onclick="showAddAssignment()" data-i18n="addAssignment">+ 添加排班</button>
       </div>
 
       <!-- 工时汇总 -->
       <div class="card">
-        <div class="card-title">📊 工地工时汇总</div>
+        <div class="card-title">📊 <span data-i18n="siteHoursStats">工地工时统计</span></div>
+        <div class="flex-row mb-8">
+          <input type="date" id="summaryStart" class="form-input">
+          <input type="date" id="summaryEnd" class="form-input">
+          <button class="btn btn-primary btn-sm" onclick="loadSiteSummary()" style="flex:0 0 auto;" data-i18n="statBtn">统计</button>
+        </div>
+        <div id="summaryStats"></div>
         <div id="siteSummary"><div class="loading"><div class="spinner"></div></div></div>
       </div>
 
       <!-- 全部工时 -->
       <div class="card">
-        <div class="card-title">🕐 全部工时记录</div>
+        <div class="card-title">🕐 <span data-i18n="allTimesheets">全部工时记录</span></div>
         <div class="flex-row mb-8">
           <input type="date" id="adminTsStart" class="form-input">
           <input type="date" id="adminTsEnd" class="form-input">
         </div>
         <div class="form-group">
           <select id="adminTsEmployee" class="form-select">
-            <option value="">全部员工</option>
+            <option value="" data-i18n="allEmployees">全部员工</option>
           </select>
         </div>
-        <button class="btn btn-primary btn-sm btn-block" onclick="loadAllTimesheets()">查询</button>
-        <button class="btn btn-outline btn-sm btn-block mt-8" onclick="exportCSV()">导出 CSV</button>
+        <button class="btn btn-primary btn-sm btn-block" onclick="loadAllTimesheets()" data-i18n="query">查询</button>
+        <button class="btn btn-outline btn-sm btn-block mt-8" onclick="exportCSV()" data-i18n="exportCsv">导出 CSV</button>
         <div id="allTimesheetList" class="mt-8"></div>
       </div>
 
       <!-- 员工管理 -->
       <div class="card">
-        <div class="card-title">👥 员工管理</div>
+        <div class="card-title">👥 <span data-i18n="employeeMgmt">员工管理</span></div>
         <div id="employeeList"></div>
-        <button class="btn btn-primary btn-block mt-8" onclick="showAddEmployee()">+ 添加员工</button>
+        <button class="btn btn-primary btn-block mt-8" onclick="showAddEmployee()" data-i18n="addEmployeeBtn">+ 添加员工</button>
       </div>
 
       <!-- 工地管理 -->
       <div class="card">
-        <div class="card-title">🏗️ 工地管理</div>
+        <div class="card-title">🏗️ <span data-i18n="siteMgmt">工地管理</span></div>
         <div id="siteList"></div>
-        <button class="btn btn-primary btn-block mt-8" onclick="showAddSite()">+ 添加工地</button>
+        <button class="btn btn-primary btn-block mt-8" onclick="showAddSite()" data-i18n="addSiteBtn">+ 添加工地</button>
       </div>
 
       <!-- 轨迹地图 -->
       <div class="card">
-        <div class="card-title">🗺️ 员工轨迹地图</div>
+        <div class="card-title">🗺️ <span data-i18n="routeMap">员工轨迹地图</span></div>
         <div class="flex-row mb-8">
           <input type="date" id="routeDate" class="form-input">
-          <select id="routeEmployee" class="form-select"><option value="">全部员工</option></select>
-          <button class="btn btn-primary btn-sm" onclick="loadRouteMap()" style="flex:0 0 auto;">查看</button>
+          <select id="routeEmployee" class="form-select"><option value="" data-i18n="allEmployees">全部员工</option></select>
+          <button class="btn btn-primary btn-sm" onclick="loadRouteMap()" style="flex:0 0 auto;" data-i18n="view">查看</button>
         </div>
         <div id="routeMap" style="height:340px;border-radius:10px;overflow:hidden;background:var(--gray-100);"></div>
         <div id="routeLegend" class="mt-8" style="font-size:13px;"></div>
-        <div style="font-size:12px;color:var(--gray-400);margin-top:6px;">提示：轨迹点来自签到/签退时的 GPS 定位，按时间先后连线。</div>
+        <div style="font-size:12px;color:var(--gray-400);margin-top:6px;" data-i18n="routeHint">提示：轨迹点来自签到/签退时的 GPS 定位，按时间先后连线。</div>
       </div>
 
       <!-- 照片与PDF报告 -->
       <div class="card">
-        <div class="card-title">📷 照片与PDF报告</div>
+        <div class="card-title">📷 <span data-i18n="photoReport">照片与PDF报告</span></div>
         <div class="flex-row mb-8">
           <input type="date" id="adminPhotoDate" class="form-input">
-          <select id="adminPhotoEmployee" class="form-select"><option value="">全部员工</option></select>
-          <button class="btn btn-primary btn-sm" onclick="loadAdminPhotos()" style="flex:0 0 auto;">查看</button>
+          <select id="adminPhotoEmployee" class="form-select"><option value="" data-i18n="allEmployees">全部员工</option></select>
+          <button class="btn btn-primary btn-sm" onclick="loadAdminPhotos()" style="flex:0 0 auto;" data-i18n="view">查看</button>
         </div>
-        <button class="btn btn-outline btn-sm btn-block mb-8" onclick="downloadPhotoPDF()">⬇️ 生成 PDF 报告</button>
+        <button class="btn btn-outline btn-sm btn-block mb-8" onclick="downloadPhotoPDF()">⬇️ <span data-i18n="generatePdf">生成 PDF 报告</span></button>
         <div id="adminPhotoList"></div>
       </div>
     </div>
@@ -339,23 +401,23 @@ html, body { height:100%; font-family: -apple-system, "PingFang SC", "Microsoft 
     <div class="tab-bar">
       <div class="tab-item active" onclick="switchTab('schedule', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        排班
+        <span data-i18n="tabSchedule">排班</span>
       </div>
       <div class="tab-item" onclick="switchTab('clock', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        签到
+        <span data-i18n="tabClock">签到</span>
       </div>
       <div class="tab-item" onclick="switchTab('timesheet', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        工时
+        <span data-i18n="tabTimesheet">工时</span>
       </div>
       <div class="tab-item" onclick="switchTab('photo', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        拍照
+        <span data-i18n="tabPhoto">拍照</span>
       </div>
       <div class="tab-item hidden" id="tabAdmin" onclick="switchTab('admin', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        管理
+        <span data-i18n="tabAdmin">管理</span>
       </div>
     </div>
   </div>
@@ -427,9 +489,184 @@ Object.defineProperty(google.script, 'run', {
 });
 
 // ╔════════════════════════════════════════╗
+// ║          i18n（中英文）                ║
+// ╚════════════════════════════════════════╝
+var LANG = localStorage.getItem('attLang') || 'en'; // 默认英文
+var I18N = {
+  en: {
+    appTitle: 'Site Attendance', logout: 'Sign out',
+    tabSchedule: 'Schedule', tabClock: 'Clock', tabTimesheet: 'Hours', tabPhoto: 'Photos', tabAdmin: 'Admin',
+    loading: 'Loading...', loginTitle: 'Site Attendance', loginPrompt: 'Sign in with your email',
+    loginPlaceholder: 'name@example.com', loginEnter: 'Enter', loginHint: 'Use the email your manager registered for you',
+    noAccessTitle: 'No access', noAccessDesc: 'Please ask your manager to add your email to the system',
+    changeEmail: 'Use a different email', currentEmail: 'Current email: ',
+    connectFail: 'Connection failed', connectFailHint: 'Please check the backend URL (BACKEND_URL) in the page',
+    todaySchedule: "Today's schedule", tomorrowSchedule: "Tomorrow's schedule",
+    noScheduleToday: 'No schedule today', noScheduleTomorrow: 'Nothing scheduled for tomorrow',
+    clockedInAt: 'Clocked in: {site} ({time})', statusNotClockedIn: 'Status: not clocked in',
+    workContent: 'Work done', workContentPlaceholder: "Describe today's work...", clockOutBtn: 'Clock out',
+    selectSite: 'Select site', selectSitePlaceholder: 'Choose a site', clockInBtn: 'Clock in',
+    noSites: 'No sites available, please contact your manager',
+    gettingLocation: 'Getting location...', clockingIn: 'Clocking in...', clockingOut: 'Clocking out...',
+    pickSiteFirst: 'Please select a site', locTimeout: 'Location timed out, continuing',
+    locFail: 'Location failed [{code}]: {msg}, continuing', locUnsupported: "Browser doesn't support location, continuing",
+    loadFailed: 'Load failed: {msg}',
+    myHours: 'My hours', query: 'Search', noTimesheet: 'No records yet', open: 'Open',
+    totalHoursRecords: '{h} h total / {n} records',
+    photoUploadTitle: 'Take site photos', noteOptional: 'Note (optional)', notePlaceholder: 'e.g. 2F plumbing done',
+    takePhoto: 'Take / choose photos', upload: 'Upload', myRecentPhotos: 'My recent photos',
+    noPhotosDay: 'No photos this day', photoTakeFirst: 'Take a photo first',
+    uploading: 'Uploading {n}/{total}', uploadDone: 'Uploaded {n}', uploadDoneFail: 'Done, {n} failed',
+    scheduleMgmt: 'Schedule management', selectDate: 'Select date', addAssignment: '+ Add assignment',
+    noScheduleDay: 'No schedule this day',
+    siteHoursStats: 'Site hours', statBtn: 'Calculate', noDataPeriod: 'No data for this period',
+    statSites: 'Sites', statTotalHours: 'Total hours', statClockings: 'Clock-ins',
+    workersRecords: '{w} workers · {r} records',
+    allTimesheets: 'All time records', allEmployees: 'All employees', exportCsv: 'Export CSV', noRecords: 'No records',
+    employeeMgmt: 'Employees', addEmployeeBtn: '+ Add employee', noEmployees: 'No employees',
+    siteMgmt: 'Sites', addSiteBtn: '+ Add site', noSitesAdmin: 'No sites',
+    routeMap: 'Employee route map', view: 'View',
+    routeHint: 'Points come from clock-in/out GPS, connected in time order.',
+    noRoutePoints: 'No located clock-ins this day',
+    photoReport: 'Photos & PDF report', generatePdf: 'Generate PDF report', noPhotosCond: 'No photos for the selection',
+    generatingPdf: 'Generating PDF...', pdfDone: 'PDF generated', genFail: 'Generation failed',
+    addAssignmentTitle: 'Add assignment ({date})', addSiteFirst: '(add a site first)',
+    selectEmployees: 'Select employees (multiple)', addEmpFirst: '(add an employee first)',
+    selectAll: 'Select all', clearAll: 'Clear', note: 'Note', optional: 'optional', confirmAdd: 'Confirm', del: 'Delete',
+    pickDateFirst: 'Select a date first', pickEmpToast: 'Select at least one employee',
+    assignmentsAdded: '{n} assignment(s) added', confirmDelAssignment: 'Delete this assignment?', deleted: 'Deleted',
+    addEmployeeTitle: 'Add employee', email: 'Email', name: 'Name', role: 'Role',
+    roleEmployee: 'Employee', roleAdmin: 'Admin', fillComplete: 'Please fill all fields',
+    editEmployeeTitle: 'Edit employee', status: 'Status', statusActive: 'Active', statusInactive: 'Left',
+    save: 'Save', edit: 'Edit',
+    addSiteTitle: 'Add site', siteName: 'Site name', siteNamePlaceholder: 'e.g. Monash Uni Level 3',
+    address: 'Address', addressPlaceholder: 'Full address', enterSiteName: 'Enter a site name',
+    editSiteTitle: 'Edit site', statusInProgress: 'Active', statusCompleted: 'Completed',
+    noDataExport: 'No data to export', exportSuccess: 'Exported',
+    csvHeaders: 'Date,Employee,Site,In,Out,Hours,Work,In location,Out location',
+    clockInSuccess: 'Clocked in: {site} {time}', clockOutSuccess: 'Clocked out, {hours} h',
+    alreadyClockedIn: 'You are already clocked in, please clock out first', notRegistered: 'User not registered',
+    noOpenClockIn: 'No open clock-in found', noPermission: 'No permission', emailExists: 'This email already exists',
+    employeeAdded: 'Employee added', employeeUpdated: 'Employee updated', siteAdded: 'Site added',
+    siteUpdated: 'Site updated', scheduleSaved: 'Schedule saved', recordUpdated: 'Record updated',
+    recordDeleted: 'Record deleted', photoUploaded: 'Photo uploaded',
+    invalidEmail: 'Please enter a valid email', pts: 'pts'
+  },
+  zh: {
+    appTitle: '工地考勤管理', logout: '退出',
+    tabSchedule: '排班', tabClock: '签到', tabTimesheet: '工时', tabPhoto: '拍照', tabAdmin: '管理',
+    loading: '加载中...', loginTitle: '工地考勤', loginPrompt: '请输入你的邮箱登录',
+    loginPlaceholder: 'name@example.com', loginEnter: '进入', loginHint: '用管理员给你登记的邮箱登录即可',
+    noAccessTitle: '无访问权限', noAccessDesc: '请联系管理员将你的邮箱添加到系统中',
+    changeEmail: '换个邮箱', currentEmail: '当前邮箱: ',
+    connectFail: '连接失败', connectFailHint: '请检查页面里的后端网址（BACKEND_URL）是否填对',
+    todaySchedule: '今日排班', tomorrowSchedule: '明日排班',
+    noScheduleToday: '今天没有排班', noScheduleTomorrow: '明天暂未安排',
+    clockedInAt: '已签到: {site} ({time})', statusNotClockedIn: '当前状态: 未签到',
+    workContent: '工作内容', workContentPlaceholder: '填写今日工作内容...', clockOutBtn: '签退',
+    selectSite: '选择工地', selectSitePlaceholder: '请选择工地', clockInBtn: '签到',
+    noSites: '暂无可选工地，请联系管理员添加',
+    gettingLocation: '正在获取位置...', clockingIn: '签到中...', clockingOut: '签退中...',
+    pickSiteFirst: '请选择工地', locTimeout: '定位超时，继续签到',
+    locFail: '定位失败 [{code}]: {msg}，继续签到', locUnsupported: '浏览器不支持定位，继续签到',
+    loadFailed: '加载失败: {msg}',
+    myHours: '我的工时', query: '查询', noTimesheet: '暂无工时记录', open: '未签退',
+    totalHoursRecords: '合计 {h} 小时 / {n} 条',
+    photoUploadTitle: '现场拍照上传', noteOptional: '说明（可选）', notePlaceholder: '例: 二楼水管安装完成',
+    takePhoto: '拍照 / 选择照片', upload: '上传', myRecentPhotos: '我的近期照片',
+    noPhotosDay: '当天没有照片', photoTakeFirst: '请先拍照',
+    uploading: '上传中 {n}/{total}', uploadDone: '已上传 {n} 张', uploadDoneFail: '完成，{n} 张失败',
+    scheduleMgmt: '排班管理', selectDate: '选择日期', addAssignment: '+ 添加排班',
+    noScheduleDay: '该日暂无排班',
+    siteHoursStats: '工地工时统计', statBtn: '统计', noDataPeriod: '该时段暂无数据',
+    statSites: '工地数', statTotalHours: '总工时', statClockings: '考勤次数',
+    workersRecords: '{w} 名工人 · {r} 条记录',
+    allTimesheets: '全部工时记录', allEmployees: '全部员工', exportCsv: '导出 CSV', noRecords: '暂无记录',
+    employeeMgmt: '员工管理', addEmployeeBtn: '+ 添加员工', noEmployees: '暂无员工',
+    siteMgmt: '工地管理', addSiteBtn: '+ 添加工地', noSitesAdmin: '暂无工地',
+    routeMap: '员工轨迹地图', view: '查看',
+    routeHint: '提示：轨迹点来自签到/签退时的 GPS 定位，按时间先后连线。',
+    noRoutePoints: '该日没有带定位的签到记录',
+    photoReport: '照片与PDF报告', generatePdf: '生成 PDF 报告', noPhotosCond: '所选条件下没有照片',
+    generatingPdf: '正在生成 PDF...', pdfDone: 'PDF 已生成', genFail: '生成失败',
+    addAssignmentTitle: '添加排班 ({date})', addSiteFirst: '(请先添加工地)',
+    selectEmployees: '选择员工（可多选）', addEmpFirst: '(请先添加员工)',
+    selectAll: '全选', clearAll: '取消全选', note: '备注', optional: '可选', confirmAdd: '确认添加', del: '删除',
+    pickDateFirst: '请先选择日期', pickEmpToast: '请至少选择一名员工',
+    assignmentsAdded: '{n} 人排班已添加', confirmDelAssignment: '确认删除该排班？', deleted: '已删除',
+    addEmployeeTitle: '添加员工', email: '邮箱', name: '姓名', role: '角色',
+    roleEmployee: '员工', roleAdmin: '管理员', fillComplete: '请填写完整',
+    editEmployeeTitle: '编辑员工', status: '状态', statusActive: '在职', statusInactive: '离职',
+    save: '保存', edit: '编辑',
+    addSiteTitle: '添加工地', siteName: '工地名称', siteNamePlaceholder: '例: Monash 大学 Level 3',
+    address: '地址', addressPlaceholder: '详细地址', enterSiteName: '请输入工地名称',
+    editSiteTitle: '编辑工地', statusInProgress: '进行中', statusCompleted: '已完成',
+    noDataExport: '无数据可导出', exportSuccess: '导出成功',
+    csvHeaders: '日期,员工,工地,签到,签退,工时(小时),工作内容,签到位置,签退位置',
+    clockInSuccess: '签到成功: {site} {time}', clockOutSuccess: '签退成功，工时 {hours} 小时',
+    alreadyClockedIn: '你已签到，请先签退', notRegistered: '用户未注册',
+    noOpenClockIn: '没有找到未签退的记录', noPermission: '无权限', emailExists: '该邮箱已存在',
+    employeeAdded: '员工已添加', employeeUpdated: '员工信息已更新', siteAdded: '工地已添加',
+    siteUpdated: '工地信息已更新', scheduleSaved: '排班已保存', recordUpdated: '记录已更新',
+    recordDeleted: '记录已删除', photoUploaded: '照片已上传',
+    invalidEmail: '请输入有效邮箱', pts: '点'
+  }
+};
+
+function t(key, vars) {
+  var s = (I18N[LANG] && I18N[LANG][key] != null) ? I18N[LANG][key] : (I18N.en[key] != null ? I18N.en[key] : key);
+  if (vars) for (var k in vars) s = s.split('{' + k + '}').join(vars[k]);
+  return s;
+}
+
+// 翻译来自后端/表格的固定值（角色、状态等）
+function tv(val) {
+  var map = {
+    '管理员': 'roleAdmin', '员工': 'roleEmployee', '在职': 'statusActive', '离职': 'statusInactive',
+    '进行中': 'statusInProgress', '已完成': 'statusCompleted'
+  };
+  return map[val] ? t(map[val]) : val;
+}
+
+// 翻译后端返回的固定提示语（动态部分用 clockIn/clockOut 的结构化字段处理）
+function serverMsg(msg) {
+  if (!msg) return msg;
+  if (msg.indexOf('你已') === 0) return t('alreadyClockedIn');
+  var map = {
+    '无权限': 'noPermission', '用户未注册': 'notRegistered', '没有找到未签退的记录': 'noOpenClockIn',
+    '该邮箱已存在': 'emailExists', '员工已添加': 'employeeAdded', '员工信息已更新': 'employeeUpdated',
+    '工地已添加': 'siteAdded', '工地信息已更新': 'siteUpdated', '排班已保存': 'scheduleSaved',
+    '记录已更新': 'recordUpdated', '记录已删除': 'recordDeleted', '照片已上传': 'photoUploaded',
+    '所选条件下没有照片': 'noPhotosCond'
+  };
+  return map[msg] ? t(map[msg]) : msg;
+}
+
+function applyStaticI18n() {
+  document.documentElement.lang = (LANG === 'zh' ? 'zh' : 'en');
+  var els = document.querySelectorAll('[data-i18n]');
+  for (var i = 0; i < els.length; i++) els[i].textContent = t(els[i].getAttribute('data-i18n'));
+  var phs = document.querySelectorAll('[data-i18n-ph]');
+  for (var j = 0; j < phs.length; j++) phs[j].setAttribute('placeholder', t(phs[j].getAttribute('data-i18n-ph')));
+  var switches = document.querySelectorAll('.lang-switch');
+  for (var s = 0; s < switches.length; s++) {
+    switches[s].querySelector('[data-lang="en"]').classList.toggle('active', LANG === 'en');
+    switches[s].querySelector('[data-lang="zh"]').classList.toggle('active', LANG === 'zh');
+  }
+}
+
+function setLang(l) {
+  if (l === LANG) return;
+  LANG = l;
+  localStorage.setItem('attLang', l);
+  location.reload(); // 刷新即可全量切换语言（保持登录态）
+}
+
+// ╔════════════════════════════════════════╗
 // ║          Initialization               ║
 // ╚════════════════════════════════════════╝
 (function init() {
+  applyStaticI18n();
   APP.email = (localStorage.getItem('attEmail') || '').trim();
   if (!APP.email) { showLogin(); return; }
   loadCurrentUser();
@@ -446,7 +683,7 @@ function showLogin() {
 
 function submitLogin() {
   var email = (document.getElementById('loginEmail').value || '').trim().toLowerCase();
-  if (!email || email.indexOf('@') < 1) { showToast('请输入有效邮箱', 'error'); return; }
+  if (!email || email.indexOf('@') < 1) { showToast(t('invalidEmail'), 'error'); return; }
   APP.email = email;
   localStorage.setItem('attEmail', email);
   document.getElementById('loginScreen').classList.add('hidden');
@@ -466,13 +703,13 @@ function loadCurrentUser() {
     document.getElementById('loadingScreen').classList.add('hidden');
     if (!user) {
       document.getElementById('noAccessScreen').classList.remove('hidden');
-      document.getElementById('noAccessEmail').textContent = '当前邮箱: ' + APP.email;
+      document.getElementById('noAccessEmail').textContent = t('currentEmail') + APP.email;
       return;
     }
     APP.user = user;
     document.getElementById('mainApp').classList.remove('hidden');
     document.getElementById('mainApp').style.display = 'flex';
-    document.getElementById('userInfo').textContent = user.name + (user.role === '管理员' ? ' (管理员)' : '');
+    document.getElementById('userInfo').textContent = user.name + (user.role === '管理员' ? ' (' + t('roleAdmin') + ')' : '');
 
     if (user.role === '管理员') {
       document.getElementById('tabAdmin').classList.remove('hidden');
@@ -488,7 +725,7 @@ function loadCurrentUser() {
     }
   }).withFailureHandler(function(e) {
     document.getElementById('loadingScreen').classList.remove('hidden');
-    document.getElementById('loadingScreen').innerHTML = '<div style="font-size:48px; margin-bottom:16px;">⚠️</div><h2>连接失败</h2><p>' + (e && e.message ? e.message : e) + '</p><p style="margin-top:12px;font-size:13px;color:#9ca3af;">请检查页面里的后端网址（BACKEND_URL）是否填对</p>';
+    document.getElementById('loadingScreen').innerHTML = '<div style="font-size:48px; margin-bottom:16px;">⚠️</div><h2>' + t('connectFail') + '</h2><p>' + (e && e.message ? e.message : e) + '</p><p style="margin-top:12px;font-size:13px;color:#9ca3af;">' + t('connectFailHint') + '</p>';
   }).getCurrentUser();
 }
 
@@ -514,7 +751,11 @@ function startClock() {
   function tick() {
     var now = new Date();
     document.getElementById('liveClock').textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
-    document.getElementById('liveDate').textContent = now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日 ' + ['日','一','二','三','四','五','六'][now.getDay()];
+    if (LANG === 'zh') {
+      document.getElementById('liveDate').textContent = now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日 周' + ['日','一','二','三','四','五','六'][now.getDay()];
+    } else {
+      document.getElementById('liveDate').textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
   }
   tick();
   setInterval(tick, 1000);
@@ -528,11 +769,11 @@ function loadSchedules() {
   var tmr = getDateStr(new Date(Date.now() + 86400000));
 
   google.script.run.withSuccessHandler(function(data) {
-    renderScheduleList('todaySchedule', data, '今天没有排班');
+    renderScheduleList('todaySchedule', data, t('noScheduleToday'));
   }).getMySchedule(today);
 
   google.script.run.withSuccessHandler(function(data) {
-    renderScheduleList('tomorrowSchedule', data, '明天暂未安排');
+    renderScheduleList('tomorrowSchedule', data, t('noScheduleTomorrow'));
   }).getMySchedule(tmr);
 }
 
@@ -565,22 +806,22 @@ function loadClockStatus() {
 
   google.script.run.withSuccessHandler(function(d) {
     if (d.error) {
-      area.innerHTML = '<div class="card"><div class="empty">' + esc(d.error) + '</div></div>';
+      area.innerHTML = '<div class="card"><div class="empty">' + esc(serverMsg(d.error)) + '</div></div>';
       return;
     }
 
     if (d.active) {
-      siteInfo.textContent = '已签到: ' + d.active.siteName + ' (' + d.active.clockIn + ')';
+      siteInfo.textContent = t('clockedInAt', { site: d.active.siteName, time: d.active.clockIn });
       area.innerHTML = '<div class="card">'
-        + '<div class="form-group"><label class="form-label">工作内容</label>'
-        + '<textarea id="clockOutContent" class="form-textarea" placeholder="填写今日工作内容..."></textarea></div>'
-        + '<button class="btn btn-danger btn-block" onclick="doClockOut()">签退</button>'
+        + '<div class="form-group"><label class="form-label">' + t('workContent') + '</label>'
+        + '<textarea id="clockOutContent" class="form-textarea" placeholder="' + t('workContentPlaceholder') + '"></textarea></div>'
+        + '<button class="btn btn-danger btn-block" onclick="doClockOut()">' + t('clockOutBtn') + '</button>'
         + '</div>';
     } else {
-      siteInfo.textContent = '当前状态: 未签到';
+      siteInfo.textContent = t('statusNotClockedIn');
       var html = '<div class="card">';
-      html += '<div class="form-group"><label class="form-label">选择工地</label>';
-      html += '<select id="clockInSite" class="form-select"><option value="">请选择工地</option>';
+      html += '<div class="form-group"><label class="form-label">' + t('selectSite') + '</label>';
+      html += '<select id="clockInSite" class="form-select"><option value="">' + t('selectSitePlaceholder') + '</option>';
 
       var added = {};
       var schedules = d.schedules || [];
@@ -599,32 +840,32 @@ function loadClockStatus() {
       html += '</select></div>';
 
       if (schedules.length === 0 && sites.length === 0) {
-        html += '<div class="empty" style="padding:8px 0;">暂无可选工地，请联系管理员添加</div>';
+        html += '<div class="empty" style="padding:8px 0;">' + t('noSites') + '</div>';
       } else {
-        html += '<button class="btn btn-success btn-block" onclick="doClockIn()">签到</button>';
+        html += '<button class="btn btn-success btn-block" onclick="doClockIn()">' + t('clockInBtn') + '</button>';
       }
 
       html += '</div>';
       area.innerHTML = html;
     }
   }).withFailureHandler(function(e) {
-    area.innerHTML = '<div class="card"><div class="empty" style="color:var(--red);">加载失败: ' + esc(e.message) + '</div></div>';
+    area.innerHTML = '<div class="card"><div class="empty" style="color:var(--red);">' + t('loadFailed', { msg: esc(e.message) }) + '</div></div>';
   }).getClockInPageData();
 }
 
 function doClockIn() {
   var site = document.getElementById('clockInSite').value;
-  if (!site) { showToast('请选择工地', 'error'); return; }
+  if (!site) { showToast(t('pickSiteFirst'), 'error'); return; }
 
-  showToast('正在获取位置...', '');
+  showToast(t('gettingLocation'), '');
   getLocation(function(loc) {
-    showToast('签到中...', '');
+    showToast(t('clockingIn'), '');
     google.script.run.withSuccessHandler(function(r) {
       if (r.success) {
-        showToast(r.msg, 'success');
+        showToast(t('clockInSuccess', { site: site, time: r.time || '' }), 'success');
         loadClockStatus();
       } else {
-        showToast(r.msg, 'error');
+        showToast(serverMsg(r.msg), 'error');
       }
     }).withFailureHandler(function(e) { showToast(e.message, 'error'); }).clockIn(site, loc);
   });
@@ -632,15 +873,15 @@ function doClockIn() {
 
 function doClockOut() {
   var content = document.getElementById('clockOutContent').value;
-  showToast('正在获取位置...', '');
+  showToast(t('gettingLocation'), '');
   getLocation(function(loc) {
-    showToast('签退中...', '');
+    showToast(t('clockingOut'), '');
     google.script.run.withSuccessHandler(function(r) {
       if (r.success) {
-        showToast(r.msg, 'success');
+        showToast(t('clockOutSuccess', { hours: (r.hours != null ? r.hours : '') }), 'success');
         loadClockStatus();
       } else {
-        showToast(r.msg, 'error');
+        showToast(serverMsg(r.msg), 'error');
       }
     }).withFailureHandler(function(e) { showToast(e.message, 'error'); }).clockOut(content, loc);
   });
@@ -652,16 +893,16 @@ function getLocation(callback) {
   function finish(loc) { if (done) return; done = true; callback(loc); }
 
   if (!navigator.geolocation) {
-    showToast('浏览器不支持定位，继续签到', '');
+    showToast(t('locUnsupported'), '');
     finish(null);
     return;
   }
 
-  // 硬性兜底：6 秒内若没结果就直接继续，避免卡死
+  // 硬性兜底：比定位超时更长，确保以定位结果为准、又不会无限卡死
   var fallback = setTimeout(function() {
-    showToast('定位超时，继续签到', '');
+    showToast(t('locTimeout'), '');
     finish(null);
-  }, 6000);
+  }, 16000);
 
   navigator.geolocation.getCurrentPosition(
     function(pos) {
@@ -671,10 +912,11 @@ function getLocation(callback) {
     function(err) {
       clearTimeout(fallback);
       // 显示真实错误便于排查：code 1=被拒绝/被权限策略禁止, 2=位置不可用, 3=超时
-      showToast('定位失败 [' + err.code + ']: ' + (err.message || '') + '，继续签到', 'error');
+      showToast(t('locFail', { code: err.code, msg: (err.message || '') }), 'error');
       finish(null);
     },
-    { timeout: 6000, enableHighAccuracy: true, maximumAge: 0 }
+    // 手机 GPS 首次定位慢，给 15 秒；允许用最近 1 分钟内的定位以加快
+    { timeout: 15000, enableHighAccuracy: true, maximumAge: 60000 }
   );
 }
 
@@ -689,7 +931,7 @@ function loadMyTimesheets() {
 
   google.script.run.withSuccessHandler(function(data) {
     if (!data || data.length === 0) {
-      c.innerHTML = '<div class="empty"><div class="empty-icon">📋</div>暂无工时记录</div>';
+      c.innerHTML = '<div class="empty"><div class="empty-icon">📋</div>' + t('noTimesheet') + '</div>';
       return;
     }
     var totalH = 0;
@@ -700,11 +942,11 @@ function loadMyTimesheets() {
       totalH += h;
       html += '<div class="ts-item">'
         + '<div class="ts-row"><span class="ts-site">' + esc(d.siteName) + '</span><span class="ts-hours">' + h + 'h</span></div>'
-        + '<div class="ts-detail">' + esc(d.date) + '  ' + esc(d.clockIn) + (d.clockOut ? ' - ' + esc(d.clockOut) : ' <span class="badge badge-orange">未签退</span>') + '</div>'
+        + '<div class="ts-detail">' + esc(d.date) + '  ' + esc(d.clockIn) + (d.clockOut ? ' - ' + esc(d.clockOut) : ' <span class="badge badge-orange">' + t('open') + '</span>') + '</div>'
         + (d.workContent ? '<div class="ts-content">' + esc(d.workContent) + '</div>' : '')
         + '</div>';
     }
-    html = '<div style="text-align:right;margin-bottom:8px;"><span class="badge badge-blue">合计 ' + Math.round(totalH*100)/100 + ' 小时 / ' + data.length + ' 条</span></div>' + html;
+    html = '<div style="text-align:right;margin-bottom:8px;"><span class="badge badge-blue">' + t('totalHoursRecords', { h: Math.round(totalH*100)/100, n: data.length }) + '</span></div>' + html;
     c.innerHTML = html;
   }).getMyTimesheets(s, e);
 }
@@ -719,6 +961,10 @@ function loadAdminData() {
     dateInput.value = getDateStr(new Date(Date.now() + 86400000));
   }
   loadAdminSchedule();
+  var _today = getDateStr(new Date());
+  var _monthAgo = getDateStr(new Date(Date.now() - 30 * 86400000));
+  if (document.getElementById('summaryStart') && !document.getElementById('summaryStart').value) document.getElementById('summaryStart').value = _monthAgo;
+  if (document.getElementById('summaryEnd') && !document.getElementById('summaryEnd').value) document.getElementById('summaryEnd').value = _today;
   loadSiteSummary();
   loadEmployeeList();
   loadSiteList();
@@ -762,7 +1008,7 @@ function loadAdminSchedule() {
 
   google.script.run.withSuccessHandler(function(data) {
     if (!data || data.length === 0) {
-      c.innerHTML = '<div class="empty" style="padding:16px 0;">该日暂无排班</div>';
+      c.innerHTML = '<div class="empty" style="padding:16px 0;">' + t('noScheduleDay') + '</div>';
       return;
     }
     var html = '';
@@ -773,7 +1019,7 @@ function loadAdminSchedule() {
         + '<div class="addr">' + esc(d.siteAddress) + '</div>'
         + (d.note ? '<div class="note">' + esc(d.note) + '</div>' : '')
         + '</div>'
-        + '<button class="btn btn-sm btn-outline" onclick="deleteAssignment(' + d.row + ')" style="flex:0 0 auto;">删除</button>'
+        + '<button class="btn btn-sm btn-outline" onclick="deleteAssignment(' + d.row + ')" style="flex:0 0 auto;">' + t('del') + '</button>'
         + '</div>';
     }
     c.innerHTML = html;
@@ -782,9 +1028,9 @@ function loadAdminSchedule() {
 
 function showAddAssignment() {
   var date = document.getElementById('adminScheduleDate').value;
-  if (!date) { showToast('请先选择日期', 'error'); return; }
+  if (!date) { showToast(t('pickDateFirst'), 'error'); return; }
 
-  showToast('加载中...', '');
+  showToast(t('loading'), '');
   google.script.run.withSuccessHandler(function(d) {
     var sites = d.sites || [];
     var emps = d.employees || [];
@@ -803,20 +1049,20 @@ function showAddAssignment() {
         + '</label>';
     }
 
-    showModal('添加排班 (' + date + ')', ''
-      + '<div class="form-group"><label class="form-label">选择工地' + (sites.length === 0 ? ' <span style="color:var(--red);">(请先添加工地)</span>' : '') + '</label>'
-      + '<select id="modalSite" class="form-select"><option value="">选择工地</option>' + siteOpts + '</select></div>'
-      + '<div class="form-group"><label class="form-label">选择员工（可多选）' + (emps.length === 0 ? ' <span style="color:var(--red);">(请先添加员工)</span>' : '') + '</label>'
+    showModal(t('addAssignmentTitle', { date: date }), ''
+      + '<div class="form-group"><label class="form-label">' + t('selectSite') + (sites.length === 0 ? ' <span style="color:var(--red);">' + t('addSiteFirst') + '</span>' : '') + '</label>'
+      + '<select id="modalSite" class="form-select"><option value="">' + t('selectSitePlaceholder') + '</option>' + siteOpts + '</select></div>'
+      + '<div class="form-group"><label class="form-label">' + t('selectEmployees') + (emps.length === 0 ? ' <span style="color:var(--red);">' + t('addEmpFirst') + '</span>' : '') + '</label>'
       + '<div style="display:flex;gap:8px;margin-bottom:8px;">'
-      + '<button class="btn btn-sm btn-outline" onclick="toggleAllEmp(true)" type="button">全选</button>'
-      + '<button class="btn btn-sm btn-outline" onclick="toggleAllEmp(false)" type="button">取消全选</button>'
+      + '<button class="btn btn-sm btn-outline" onclick="toggleAllEmp(true)" type="button">' + t('selectAll') + '</button>'
+      + '<button class="btn btn-sm btn-outline" onclick="toggleAllEmp(false)" type="button">' + t('clearAll') + '</button>'
       + '</div>'
       + '<div id="empCheckList" style="max-height:200px;overflow-y:auto;border:1px solid var(--gray-200);border-radius:8px;padding:0 10px;">' + empChecks + '</div></div>'
-      + '<div class="form-group"><label class="form-label">备注</label><input id="modalNote" class="form-input" placeholder="可选"></div>'
-      + '<button class="btn btn-primary btn-block" onclick="submitAssignment()">确认添加</button>'
+      + '<div class="form-group"><label class="form-label">' + t('note') + '</label><input id="modalNote" class="form-input" placeholder="' + t('optional') + '"></div>'
+      + '<button class="btn btn-primary btn-block" onclick="submitAssignment()">' + t('confirmAdd') + '</button>'
     );
   }).withFailureHandler(function(e) {
-    showToast('加载失败: ' + e.message, 'error');
+    showToast(t('loadFailed', { msg: e.message }), 'error');
   }).getScheduleFormData();
 }
 
@@ -839,8 +1085,8 @@ function submitAssignment() {
     selectedEmps.push({ email: boxes[i].value, name: boxes[i].getAttribute('data-name') });
   }
 
-  if (!site) { showToast('请选择工地', 'error'); return; }
-  if (selectedEmps.length === 0) { showToast('请至少选择一名员工', 'error'); return; }
+  if (!site) { showToast(t('pickSiteFirst'), 'error'); return; }
+  if (selectedEmps.length === 0) { showToast(t('pickEmpToast'), 'error'); return; }
 
   // 获取已有排班，追加新的
   google.script.run.withSuccessHandler(function(existing) {
@@ -861,41 +1107,74 @@ function submitAssignment() {
 
     google.script.run.withSuccessHandler(function(r) {
       if (r.success) {
-        showToast(selectedEmps.length + '人排班已添加', 'success');
+        showToast(t('assignmentsAdded', { n: selectedEmps.length }), 'success');
         closeModal();
         loadAdminSchedule();
       } else {
-        showToast(r.msg, 'error');
+        showToast(serverMsg(r.msg), 'error');
       }
     }).saveSchedule(date, assignments);
   }).getScheduleForDate(date);
 }
 
 function deleteAssignment(row) {
-  if (!confirm('确认删除该排班？')) return;
+  if (!confirm(t('confirmDelAssignment'))) return;
   google.script.run.withSuccessHandler(function() {
-    showToast('已删除', 'success');
+    showToast(t('deleted'), 'success');
     loadAdminSchedule();
   }).deleteScheduleRow(row);
 }
 
 // ── Site Summary ──
 function loadSiteSummary() {
+  var s = document.getElementById('summaryStart') ? document.getElementById('summaryStart').value : '';
+  var e = document.getElementById('summaryEnd') ? document.getElementById('summaryEnd').value : '';
+  var c = document.getElementById('siteSummary');
+  c.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+
   google.script.run.withSuccessHandler(function(data) {
-    var c = document.getElementById('siteSummary');
+    var statsEl = document.getElementById('summaryStats');
     if (!data || data.length === 0) {
-      c.innerHTML = '<div class="empty" style="padding:16px 0;">暂无数据</div>';
+      if (statsEl) statsEl.innerHTML = '';
+      c.innerHTML = '<div class="empty" style="padding:16px 0;">' + t('noDataPeriod') + '</div>';
       return;
     }
-    var html = '';
+
+    var totalHours = 0, totalRecords = 0, maxHours = 0;
     for (var i = 0; i < data.length; i++) {
-      var d = data[i];
-      html += '<div class="summary-row"><div><div class="summary-site">' + esc(d.siteName) + '</div>'
-        + '<div class="summary-detail">' + d.recordCount + '条记录 · ' + esc(d.workerDetail) + '</div></div>'
-        + '<div class="summary-hours">' + d.totalHours + 'h</div></div>';
+      totalHours += parseFloat(data[i].totalHours) || 0;
+      totalRecords += data[i].recordCount || 0;
+      if (data[i].totalHours > maxHours) maxHours = data[i].totalHours;
+    }
+    totalHours = Math.round(totalHours * 100) / 100;
+
+    if (statsEl) {
+      statsEl.innerHTML = '<div class="stat-grid">'
+        + '<div class="stat-tile"><div class="num">' + data.length + '</div><div class="lbl">' + t('statSites') + '</div></div>'
+        + '<div class="stat-tile"><div class="num">' + totalHours + '</div><div class="lbl">' + t('statTotalHours') + '</div></div>'
+        + '<div class="stat-tile"><div class="num">' + totalRecords + '</div><div class="lbl">' + t('statClockings') + '</div></div>'
+        + '</div>';
+    }
+
+    var html = '';
+    for (var j = 0; j < data.length; j++) {
+      var d = data[j];
+      var pct = maxHours > 0 ? Math.round(d.totalHours / maxHours * 100) : 0;
+      var chips = '';
+      if (d.workerList) {
+        for (var k = 0; k < d.workerList.length; k++) {
+          chips += '<span class="chip">' + esc(d.workerList[k].name) + ' · ' + d.workerList[k].hours + 'h</span>';
+        }
+      }
+      html += '<div class="site-stat">'
+        + '<div class="site-stat-head"><span class="site-stat-name">' + esc(d.siteName) + '</span><span class="site-stat-hours">' + d.totalHours + 'h</span></div>'
+        + '<div class="site-bar"><div class="site-bar-fill" style="width:' + pct + '%"></div></div>'
+        + '<div class="site-stat-meta">' + t('workersRecords', { w: (d.workerCount || 0), r: d.recordCount }) + '</div>'
+        + (chips ? '<div class="site-stat-workers">' + chips + '</div>' : '')
+        + '</div>';
     }
     c.innerHTML = html;
-  }).getSiteHoursSummary();
+  }).getSiteHoursSummary(s, e);
 }
 
 // ── All Timesheets ──
@@ -923,7 +1202,7 @@ function loadAllTimesheets() {
 
   google.script.run.withSuccessHandler(function(data) {
     if (!data || data.length === 0) {
-      c.innerHTML = '<div class="empty" style="padding:16px 0;">暂无记录</div>';
+      c.innerHTML = '<div class="empty" style="padding:16px 0;">' + t('noRecords') + '</div>';
       return;
     }
     var totalH = 0;
@@ -934,11 +1213,11 @@ function loadAllTimesheets() {
       totalH += h;
       html += '<div class="ts-item">'
         + '<div class="ts-row"><span class="ts-site">' + esc(d.name) + ' · ' + esc(d.siteName) + '</span><span class="ts-hours">' + h + 'h</span></div>'
-        + '<div class="ts-detail">' + esc(d.date) + '  ' + esc(d.clockIn) + (d.clockOut ? ' - ' + esc(d.clockOut) : ' <span class="badge badge-orange">未签退</span>') + '</div>'
+        + '<div class="ts-detail">' + esc(d.date) + '  ' + esc(d.clockIn) + (d.clockOut ? ' - ' + esc(d.clockOut) : ' <span class="badge badge-orange">' + t('open') + '</span>') + '</div>'
         + (d.workContent ? '<div class="ts-content">' + esc(d.workContent) + '</div>' : '')
         + '</div>';
     }
-    html = '<div style="text-align:right;margin-bottom:8px;"><span class="badge badge-blue">合计 ' + Math.round(totalH*100)/100 + ' 小时 / ' + data.length + ' 条</span></div>' + html;
+    html = '<div style="text-align:right;margin-bottom:8px;"><span class="badge badge-blue">' + t('totalHoursRecords', { h: Math.round(totalH*100)/100, n: data.length }) + '</span></div>' + html;
     c.innerHTML = html;
   }).getAllTimesheets(s, e, emp);
 }
@@ -949,9 +1228,9 @@ function exportCSV() {
   var e = document.getElementById('adminTsEnd').value;
 
   google.script.run.withSuccessHandler(function(data) {
-    if (!data || data.length === 0) { showToast('无数据可导出', 'error'); return; }
+    if (!data || data.length === 0) { showToast(t('noDataExport'), 'error'); return; }
 
-    var csv = '\uFEFF日期,员工,工地,签到,签退,工时(小时),工作内容,签到位置,签退位置\n';
+    var csv = '\uFEFF' + t('csvHeaders') + '\n';
     for (var i = 0; i < data.length; i++) {
       var d = data[i];
       csv += csvVal(d.date) + ',' + csvVal(d.name) + ',' + csvVal(d.siteName) + ','
@@ -963,10 +1242,10 @@ function exportCSV() {
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = '工时记录_' + (s||'all') + '_' + (e||'all') + '.csv';
+    a.download = (LANG === 'zh' ? '工时记录_' : 'timesheets_') + (s||'all') + '_' + (e||'all') + '.csv';
     a.click();
     URL.revokeObjectURL(url);
-    showToast('导出成功', 'success');
+    showToast(t('exportSuccess'), 'success');
   }).exportTimesheets(s, e);
 }
 
@@ -979,15 +1258,15 @@ function csvVal(v) {
 function loadEmployeeList() {
   google.script.run.withSuccessHandler(function(data) {
     var c = document.getElementById('employeeList');
-    if (!data || data.length === 0) { c.innerHTML = '<div class="empty" style="padding:8px 0;">暂无员工</div>'; return; }
+    if (!data || data.length === 0) { c.innerHTML = '<div class="empty" style="padding:8px 0;">' + t('noEmployees') + '</div>'; return; }
     var html = '';
     for (var i = 0; i < data.length; i++) {
       var d = data[i];
       var badge = d.status === '在职' ? 'badge-green' : 'badge-red';
       html += '<div class="schedule-item">'
-        + '<div class="schedule-info"><div class="site">' + esc(d.name) + ' <span class="badge ' + badge + '">' + esc(d.status) + '</span> <span class="badge badge-blue">' + esc(d.role) + '</span></div>'
+        + '<div class="schedule-info"><div class="site">' + esc(d.name) + ' <span class="badge ' + badge + '">' + esc(tv(d.status)) + '</span> <span class="badge badge-blue">' + esc(tv(d.role)) + '</span></div>'
         + '<div class="addr">' + esc(d.email) + '</div></div>'
-        + '<button class="btn btn-sm btn-outline" onclick="showEditEmployee(' + d.row + ',\'' + escQ(d.email) + '\',\'' + escQ(d.name) + '\',\'' + escQ(d.role) + '\',\'' + escQ(d.status) + '\')">编辑</button>'
+        + '<button class="btn btn-sm btn-outline" onclick="showEditEmployee(' + d.row + ',\'' + escQ(d.email) + '\',\'' + escQ(d.name) + '\',\'' + escQ(d.role) + '\',\'' + escQ(d.status) + '\')">' + t('edit') + '</button>'
         + '</div>';
     }
     c.innerHTML = html;
@@ -995,11 +1274,11 @@ function loadEmployeeList() {
 }
 
 function showAddEmployee() {
-  showModal('添加员工', ''
-    + '<div class="form-group"><label class="form-label">Google 邮箱</label><input id="modalEmpEmail" class="form-input" type="email" placeholder="name@gmail.com"></div>'
-    + '<div class="form-group"><label class="form-label">姓名</label><input id="modalEmpName" class="form-input" placeholder="中文姓名"></div>'
-    + '<div class="form-group"><label class="form-label">角色</label><select id="modalEmpRole" class="form-select"><option value="员工">员工</option><option value="管理员">管理员</option></select></div>'
-    + '<button class="btn btn-primary btn-block" onclick="submitAddEmployee()">确认添加</button>'
+  showModal(t('addEmployeeTitle'), ''
+    + '<div class="form-group"><label class="form-label">' + t('email') + '</label><input id="modalEmpEmail" class="form-input" type="email" placeholder="name@example.com"></div>'
+    + '<div class="form-group"><label class="form-label">' + t('name') + '</label><input id="modalEmpName" class="form-input" placeholder="' + t('name') + '"></div>'
+    + '<div class="form-group"><label class="form-label">' + t('role') + '</label><select id="modalEmpRole" class="form-select"><option value="员工">' + t('roleEmployee') + '</option><option value="管理员">' + t('roleAdmin') + '</option></select></div>'
+    + '<button class="btn btn-primary btn-block" onclick="submitAddEmployee()">' + t('confirmAdd') + '</button>'
   );
 }
 
@@ -1007,21 +1286,21 @@ function submitAddEmployee() {
   var email = document.getElementById('modalEmpEmail').value.trim();
   var name = document.getElementById('modalEmpName').value.trim();
   var role = document.getElementById('modalEmpRole').value;
-  if (!email || !name) { showToast('请填写完整', 'error'); return; }
+  if (!email || !name) { showToast(t('fillComplete'), 'error'); return; }
 
   google.script.run.withSuccessHandler(function(r) {
-    if (r.success) { showToast(r.msg, 'success'); closeModal(); loadEmployeeList(); loadAdminData(); }
-    else showToast(r.msg, 'error');
+    if (r.success) { showToast(serverMsg(r.msg), 'success'); closeModal(); loadEmployeeList(); loadAdminData(); }
+    else showToast(serverMsg(r.msg), 'error');
   }).addEmployee(email, name, role);
 }
 
 function showEditEmployee(row, email, name, role, status) {
-  showModal('编辑员工', ''
-    + '<div class="form-group"><label class="form-label">Google 邮箱</label><input id="modalEmpEmail" class="form-input" value="' + esc(email) + '"></div>'
-    + '<div class="form-group"><label class="form-label">姓名</label><input id="modalEmpName" class="form-input" value="' + esc(name) + '"></div>'
-    + '<div class="form-group"><label class="form-label">角色</label><select id="modalEmpRole" class="form-select"><option value="员工"' + (role==='员工'?' selected':'') + '>员工</option><option value="管理员"' + (role==='管理员'?' selected':'') + '>管理员</option></select></div>'
-    + '<div class="form-group"><label class="form-label">状态</label><select id="modalEmpStatus" class="form-select"><option value="在职"' + (status==='在职'?' selected':'') + '>在职</option><option value="离职"' + (status==='离职'?' selected':'') + '>离职</option></select></div>'
-    + '<button class="btn btn-primary btn-block" onclick="submitEditEmployee(' + row + ')">保存</button>'
+  showModal(t('editEmployeeTitle'), ''
+    + '<div class="form-group"><label class="form-label">' + t('email') + '</label><input id="modalEmpEmail" class="form-input" value="' + esc(email) + '"></div>'
+    + '<div class="form-group"><label class="form-label">' + t('name') + '</label><input id="modalEmpName" class="form-input" value="' + esc(name) + '"></div>'
+    + '<div class="form-group"><label class="form-label">' + t('role') + '</label><select id="modalEmpRole" class="form-select"><option value="员工"' + (role==='员工'?' selected':'') + '>' + t('roleEmployee') + '</option><option value="管理员"' + (role==='管理员'?' selected':'') + '>' + t('roleAdmin') + '</option></select></div>'
+    + '<div class="form-group"><label class="form-label">' + t('status') + '</label><select id="modalEmpStatus" class="form-select"><option value="在职"' + (status==='在职'?' selected':'') + '>' + t('statusActive') + '</option><option value="离职"' + (status==='离职'?' selected':'') + '>' + t('statusInactive') + '</option></select></div>'
+    + '<button class="btn btn-primary btn-block" onclick="submitEditEmployee(' + row + ')">' + t('save') + '</button>'
   );
 }
 
@@ -1032,8 +1311,8 @@ function submitEditEmployee(row) {
   var status = document.getElementById('modalEmpStatus').value;
 
   google.script.run.withSuccessHandler(function(r) {
-    if (r.success) { showToast(r.msg, 'success'); closeModal(); loadEmployeeList(); loadAdminData(); }
-    else showToast(r.msg, 'error');
+    if (r.success) { showToast(serverMsg(r.msg), 'success'); closeModal(); loadEmployeeList(); loadAdminData(); }
+    else showToast(serverMsg(r.msg), 'error');
   }).updateEmployee(row, email, name, role, status);
 }
 
@@ -1041,15 +1320,15 @@ function submitEditEmployee(row) {
 function loadSiteList() {
   google.script.run.withSuccessHandler(function(data) {
     var c = document.getElementById('siteList');
-    if (!data || data.length === 0) { c.innerHTML = '<div class="empty" style="padding:8px 0;">暂无工地</div>'; return; }
+    if (!data || data.length === 0) { c.innerHTML = '<div class="empty" style="padding:8px 0;">' + t('noSitesAdmin') + '</div>'; return; }
     var html = '';
     for (var i = 0; i < data.length; i++) {
       var d = data[i];
       var badge = d.status === '进行中' ? 'badge-green' : 'badge-red';
       html += '<div class="schedule-item">'
-        + '<div class="schedule-info"><div class="site">' + esc(d.name) + ' <span class="badge ' + badge + '">' + esc(d.status) + '</span></div>'
+        + '<div class="schedule-info"><div class="site">' + esc(d.name) + ' <span class="badge ' + badge + '">' + esc(tv(d.status)) + '</span></div>'
         + '<div class="addr">' + esc(d.address) + '</div></div>'
-        + '<button class="btn btn-sm btn-outline" onclick="showEditSite(' + d.row + ',\'' + escQ(d.name) + '\',\'' + escQ(d.address) + '\',\'' + escQ(d.status) + '\')">编辑</button>'
+        + '<button class="btn btn-sm btn-outline" onclick="showEditSite(' + d.row + ',\'' + escQ(d.name) + '\',\'' + escQ(d.address) + '\',\'' + escQ(d.status) + '\')">' + t('edit') + '</button>'
         + '</div>';
     }
     c.innerHTML = html;
@@ -1057,30 +1336,30 @@ function loadSiteList() {
 }
 
 function showAddSite() {
-  showModal('添加工地', ''
-    + '<div class="form-group"><label class="form-label">工地名称</label><input id="modalSiteName" class="form-input" placeholder="例: Monash 大学 Level 3"></div>'
-    + '<div class="form-group"><label class="form-label">地址</label><input id="modalSiteAddr" class="form-input" placeholder="详细地址"></div>'
-    + '<button class="btn btn-primary btn-block" onclick="submitAddSite()">确认添加</button>'
+  showModal(t('addSiteTitle'), ''
+    + '<div class="form-group"><label class="form-label">' + t('siteName') + '</label><input id="modalSiteName" class="form-input" placeholder="' + t('siteNamePlaceholder') + '"></div>'
+    + '<div class="form-group"><label class="form-label">' + t('address') + '</label><input id="modalSiteAddr" class="form-input" placeholder="' + t('addressPlaceholder') + '"></div>'
+    + '<button class="btn btn-primary btn-block" onclick="submitAddSite()">' + t('confirmAdd') + '</button>'
   );
 }
 
 function submitAddSite() {
   var name = document.getElementById('modalSiteName').value.trim();
   var addr = document.getElementById('modalSiteAddr').value.trim();
-  if (!name) { showToast('请输入工地名称', 'error'); return; }
+  if (!name) { showToast(t('enterSiteName'), 'error'); return; }
 
   google.script.run.withSuccessHandler(function(r) {
-    if (r.success) { showToast(r.msg, 'success'); closeModal(); loadSiteList(); loadAdminData(); }
-    else showToast(r.msg, 'error');
+    if (r.success) { showToast(serverMsg(r.msg), 'success'); closeModal(); loadSiteList(); loadAdminData(); }
+    else showToast(serverMsg(r.msg), 'error');
   }).addSite(name, addr);
 }
 
 function showEditSite(row, name, addr, status) {
-  showModal('编辑工地', ''
-    + '<div class="form-group"><label class="form-label">工地名称</label><input id="modalSiteName" class="form-input" value="' + esc(name) + '"></div>'
-    + '<div class="form-group"><label class="form-label">地址</label><input id="modalSiteAddr" class="form-input" value="' + esc(addr) + '"></div>'
-    + '<div class="form-group"><label class="form-label">状态</label><select id="modalSiteStatus" class="form-select"><option value="进行中"' + (status==='进行中'?' selected':'') + '>进行中</option><option value="已完成"' + (status==='已完成'?' selected':'') + '>已完成</option></select></div>'
-    + '<button class="btn btn-primary btn-block" onclick="submitEditSite(' + row + ')">保存</button>'
+  showModal(t('editSiteTitle'), ''
+    + '<div class="form-group"><label class="form-label">' + t('siteName') + '</label><input id="modalSiteName" class="form-input" value="' + esc(name) + '"></div>'
+    + '<div class="form-group"><label class="form-label">' + t('address') + '</label><input id="modalSiteAddr" class="form-input" value="' + esc(addr) + '"></div>'
+    + '<div class="form-group"><label class="form-label">' + t('status') + '</label><select id="modalSiteStatus" class="form-select"><option value="进行中"' + (status==='进行中'?' selected':'') + '>' + t('statusInProgress') + '</option><option value="已完成"' + (status==='已完成'?' selected':'') + '>' + t('statusCompleted') + '</option></select></div>'
+    + '<button class="btn btn-primary btn-block" onclick="submitEditSite(' + row + ')">' + t('save') + '</button>'
   );
 }
 
@@ -1090,8 +1369,8 @@ function submitEditSite(row) {
   var status = document.getElementById('modalSiteStatus').value;
 
   google.script.run.withSuccessHandler(function(r) {
-    if (r.success) { showToast(r.msg, 'success'); closeModal(); loadSiteList(); loadAdminData(); }
-    else showToast(r.msg, 'error');
+    if (r.success) { showToast(serverMsg(r.msg), 'success'); closeModal(); loadSiteList(); loadAdminData(); }
+    else showToast(serverMsg(r.msg), 'error');
   }).updateSite(row, name, addr, status);
 }
 
@@ -1106,7 +1385,7 @@ function loadPhotoPage() {
     var sel = document.getElementById('photoSite');
     var sites = (d && d.sites) || [];
     var schedules = (d && d.schedules) || [];
-    var html = '<option value="">请选择工地</option>';
+    var html = '<option value="">' + t('selectSitePlaceholder') + '</option>';
     var added = {};
     for (var i = 0; i < schedules.length; i++) {
       if (!added[schedules[i].siteName]) {
@@ -1177,18 +1456,18 @@ function renderPhotoPreview() {
 function removeQueued(i) { PHOTO_QUEUE.splice(i, 1); renderPhotoPreview(); }
 
 function uploadPhotos() {
-  if (!PHOTO_QUEUE.length) { showToast('请先拍照', 'error'); return; }
+  if (!PHOTO_QUEUE.length) { showToast(t('photoTakeFirst'), 'error'); return; }
   var site = document.getElementById('photoSite').value;
   var note = document.getElementById('photoNote').value;
   var btn = document.getElementById('photoUploadBtn');
   btn.disabled = true;
   var total = PHOTO_QUEUE.length, done = 0, failed = 0;
-  showToast('上传中 0/' + total, '');
+  showToast(t('uploading', { n: 0, total: total }), '');
 
   function next() {
     if (!PHOTO_QUEUE.length) {
       btn.disabled = false;
-      showToast(failed ? ('完成，' + failed + ' 张失败') : ('已上传 ' + done + ' 张'), failed ? 'error' : 'success');
+      showToast(failed ? t('uploadDoneFail', { n: failed }) : t('uploadDone', { n: done }), failed ? 'error' : 'success');
       document.getElementById('photoNote').value = '';
       renderPhotoPreview();
       loadMyPhotos();
@@ -1198,7 +1477,7 @@ function uploadPhotos() {
     google.script.run.withSuccessHandler(function(r) {
       PHOTO_QUEUE.shift();
       if (r && r.success) done++; else failed++;
-      showToast('上传中 ' + (done + failed) + '/' + total, '');
+      showToast(t('uploading', { n: (done + failed), total: total }), '');
       renderPhotoPreview();
       next();
     }).withFailureHandler(function() {
@@ -1213,7 +1492,7 @@ function loadMyPhotos() {
   var c = document.getElementById('myPhotoList');
   c.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
   google.script.run.withSuccessHandler(function(data) {
-    renderPhotoGrid(c, data, '当天没有照片');
+    renderPhotoGrid(c, data, t('noPhotosDay'));
   }).getPhotos(date, '', '');
 }
 
@@ -1240,27 +1519,27 @@ function loadAdminPhotos() {
   var c = document.getElementById('adminPhotoList');
   c.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
   google.script.run.withSuccessHandler(function(data) {
-    renderPhotoGrid(c, data, '所选条件下没有照片');
+    renderPhotoGrid(c, data, t('noPhotosCond'));
   }).getPhotos(date, emp, '');
 }
 
 function downloadPhotoPDF() {
   var date = document.getElementById('adminPhotoDate').value;
   var emp = document.getElementById('adminPhotoEmployee').value;
-  if (!date) { showToast('请选择日期', 'error'); return; }
-  showToast('正在生成 PDF...', '');
+  if (!date) { showToast(t('pickDateFirst'), 'error'); return; }
+  showToast(t('generatingPdf'), '');
   google.script.run.withSuccessHandler(function(r) {
-    if (!r || !r.success) { showToast((r && r.msg) || '生成失败', 'error'); return; }
+    if (!r || !r.success) { showToast((r && r.msg) ? serverMsg(r.msg) : t('genFail'), 'error'); return; }
     var bin = atob(r.base64);
     var bytes = new Uint8Array(bin.length);
     for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
     var blob = new Blob([bytes], { type: 'application/pdf' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
-    a.href = url; a.download = r.filename || '照片报告.pdf'; a.click();
+    a.href = url; a.download = r.filename || 'photo-report.pdf'; a.click();
     URL.revokeObjectURL(url);
-    showToast('PDF 已生成', 'success');
-  }).withFailureHandler(function(e) { showToast('生成失败: ' + e.message, 'error'); }).generatePhotoPDF(date, '', emp);
+    showToast(t('pdfDone'), 'success');
+  }).withFailureHandler(function(e) { showToast(t('genFail') + ': ' + e.message, 'error'); }).generatePhotoPDF(date, '', emp);
 }
 
 // ╔════════════════════════════════════════╗
@@ -1281,12 +1560,12 @@ function ensureRouteMap() {
 function loadRouteMap() {
   var date = document.getElementById('routeDate').value;
   var emp = document.getElementById('routeEmployee').value;
-  if (!date) { showToast('请选择日期', 'error'); return; }
+  if (!date) { showToast(t('pickDateFirst'), 'error'); return; }
   ensureRouteMap();
   setTimeout(function() { ROUTE_MAP.invalidateSize(); }, 100);
-  showToast('加载轨迹...', '');
+  showToast(t('loading'), '');
   google.script.run.withSuccessHandler(renderRouteMap)
-    .withFailureHandler(function(e) { showToast('加载失败: ' + e.message, 'error'); })
+    .withFailureHandler(function(e) { showToast(t('loadFailed', { msg: e.message }), 'error'); })
     .getRoutePoints(date, emp);
 }
 
@@ -1295,7 +1574,7 @@ function renderRouteMap(points) {
   ROUTE_LAYER.clearLayers();
   var legend = document.getElementById('routeLegend');
   if (!points || !points.length) {
-    legend.innerHTML = '<div class="empty" style="padding:8px 0;">该日没有带定位的签到记录</div>';
+    legend.innerHTML = '<div class="empty" style="padding:8px 0;">' + t('noRoutePoints') + '</div>';
     setTimeout(function() { ROUTE_MAP.invalidateSize(); }, 100);
     return;
   }
@@ -1324,7 +1603,7 @@ function renderRouteMap(points) {
         .addTo(ROUTE_LAYER);
     }
     if (latlngs.length > 1) L.polyline(latlngs, { color: color, weight: 3, opacity: 0.7 }).addTo(ROUTE_LAYER);
-    legendHtml += '<span style="display:inline-flex;align-items:center;gap:4px;margin:0 12px 6px 0;"><span style="width:12px;height:12px;border-radius:50%;background:' + color + ';display:inline-block;"></span>' + esc(g.name) + ' (' + g.pts.length + '点)</span>';
+    legendHtml += '<span style="display:inline-flex;align-items:center;gap:4px;margin:0 12px 6px 0;"><span style="width:12px;height:12px;border-radius:50%;background:' + color + ';display:inline-block;"></span>' + esc(g.name) + ' (' + g.pts.length + ' ' + t('pts') + ')</span>';
   }
   legend.innerHTML = legendHtml;
   if (bounds.length) ROUTE_MAP.fitBounds(bounds, { padding: [30, 30], maxZoom: 16 });
